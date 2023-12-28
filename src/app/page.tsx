@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Slider from "@mui/material/Slider";
 import FAQ from "./components/Faq";
+import Guidance from "./components/Guidance";
 
 const faqs = [
   {
@@ -26,8 +27,26 @@ const faqs = [
   },
 ];
 
+const guidanceItems = [
+  {
+    title: "Discover Hidden Gems with a Local Guide",
+    content:
+      "Explore unique and off-the-beaten-path destinations with the help of our experienced local guides. Get personalized recommendations and make the most of your travel experience.",
+  },
+  {
+    title: "Learn Cooking from Top Chefs",
+    content:
+      "Join exclusive cooking classes led by top chefs from around the world. Master the art of culinary delights and impress your friends and family with your newfound skills.",
+  },
+  {
+    title: "Master Photography with a Pro",
+    content:
+      "Capture breathtaking moments with guidance from professional photographers. Learn the secrets of composition, lighting, and post-processing to elevate your photography skills.",
+  },
+];
+
 export default function Home() {
-  const style = { backgroundImage: "url('/call.webp')" };
+  const style = { backgroundImage: "url('/call.jpg')" };
 
   return (
     <div className="px-5 max-w-7xl mx-auto">
@@ -106,13 +125,22 @@ export default function Home() {
       </header>
 
       {/* drop-down section */}
-      <section className="mt-14 md:mt-28 mb-14 md:mb-28">
+      <div className="mt-14 md:mt-28 mb-14 md:mb-28">
         <h1 className="text-2xl md:text-5xl text-[#000000] font-bold text-center">
           Question people ask.
         </h1>
         <div className="max-w-xl mx-auto mt-8">
           {faqs.map((faq, index) => (
             <FAQ key={index} question={faq.question} answer={faq.answer} />
+          ))}
+        </div>
+      </div>
+
+      {/* what-to-know */}
+      <section className="mt-14 md:mt-28 mb-14 md:mb-28">
+        <div className="max-w-xl mx-auto">
+          {guidanceItems.map((item, index) => (
+            <Guidance key={index} title={item.title} content={item.content} />
           ))}
         </div>
       </section>
