@@ -1,209 +1,145 @@
-import Image from "next/image";
-import Link from "next/link";
-import Slider from "@mui/material/Slider";
-import FAQ from "./components/Faq";
-import Guidance from "./components/Guidance";
-
-const faqs = [
-  {
-    question: "How do I reset my password?",
-    answer:
-      "To reset your password, click on the 'Forgot Password' link on the login page. Follow the instructions sent to your registered email to create a new password.",
-  },
-  {
-    question: "What are the system requirements for your software?",
-    answer:
-      "Our software is compatible with Windows, macOS, and Linux operating systems. Please check the product documentation for specific system requirements and compatibility details.",
-  },
-  {
-    question: "Can I upgrade my subscription plan?",
-    answer:
-      "Yes, you can upgrade your subscription plan at any time. Log in to your account, navigate to the subscription settings, and choose the desired upgrade option. Any applicable fees will be prorated based on your current subscription.",
-  },
-  {
-    question: "Is customer support available 24/7?",
-    answer:
-      "Our customer support team is available from Monday to Friday, 9:00 AM to 5:00 PM (local time). For urgent issues outside of these hours, you can leave a message, and we will get back to you as soon as possible during the next business day.",
-  },
-];
-
-const guidanceItems = [
-  {
-    title: "Discover Hidden Gems with a Local Guide",
-    content:
-      "Explore unique and off-the-beaten-path destinations with the help of our experienced local guides. Get personalized recommendations and make the most of your travel experience.",
-  },
-  {
-    title: "Learn Cooking from Top Chefs",
-    content:
-      "Join exclusive cooking classes led by top chefs from around the world. Master the art of culinary delights and impress your friends and family with your newfound skills.",
-  },
-  {
-    title: "Master Photography with a Pro",
-    content:
-      "Capture breathtaking moments with guidance from professional photographers. Learn the secrets of composition, lighting, and post-processing to elevate your photography skills.",
-  },
-];
+"use client";
+import React, { useState } from "react";
+import CheckIcon from "@mui/icons-material/Check";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import DiamondIcon from "@mui/icons-material/Diamond";
 
 export default function Home() {
-  const style = { backgroundImage: "url('/call.jpg')" };
+  const [firstBtn, setFirstBtn] = useState(true);
 
   return (
-    <div className="px-5 max-w-7xl mx-auto">
-      {/* Hero Section */}
-      <header className="grid gap-5 grid-cols-1 md:grid-cols-2 mt-5 md:mt-10">
-        <div className="text-center md:text-left">
-          <h1 className="text-4xl md:text-7xl text-[#de9005] font-bold">
-            Sherify it.
-          </h1>
-          <p className="text-lg md:text-4xl text-[#000000] mt-2 md:mt-5 font-semibold">
-            You could earn.
-          </p>
-          <h1 className="text-6xl md:text-8xl text-[#000000] mt-2 md:mt-5 font-bold">
-            $90
-          </h1>
-
-          {/* Benefits Section */}
-          <div className="mt-5 md:mt-10">
-            <p className="text-base md:text-lg font-semibold mt-2">
-              <span className="underline underline-offset-1">1 booking</span> at
-              an estimate 20 dollars
-            </p>
-            <p className="text-base md:text-lg font-semibold mt-2">
-              <span className="underline underline-offset-1">
-                {" "}
-                1 subscription
-              </span>{" "}
-              at an estimate 20 dollars
-            </p>
-            <p className="text-base md:text-lg font-semibold mt-2">
-              <span className="underline underline-offset-1">
-                {" "}
-                1 membership
-              </span>{" "}
-              at an estimate 20 dollars
-            </p>
-            <p className="text-base md:text-lg font-semibold mt-2">
-              <span className="underline underline-offset-1">
-                {" "}
-                1 family offer
-              </span>{" "}
-              at an estimate 20 dollars
-            </p>
-          </div>
-
-          {/* Slider Section */}
-          <div className="mt-5 md:mt-10">
-            <Slider
-              value={50}
-              aria-label="Default"
-              valueLabelDisplay="auto"
-              sx={{ color: "black" }}
-            />
-            <p className="text-base md:text-lg font-normal mt-2 line-clamp-3">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam,
-              unde.
-            </p>
-          </div>
-        </div>
-        {/* Placeholder for the second column on larger screens */}
-        <div className="flex items-center justify-center lg:justify-end">
-          <Image
-            alt="mobile phone"
-            src="/phone1.webp"
-            width={300}
-            height={300}
-          />
-          <Image
-            className="hidden lg:block"
-            alt="mobile phone"
-            src="/phone2.webp"
-            width={300}
-            height={300}
-          />
-        </div>
-      </header>
-
-      {/* drop-down section */}
-      <div className="mt-14 md:mt-28 mb-14 md:mb-28">
-        <h1 className="text-2xl md:text-5xl text-[#000000] font-bold text-center">
-          Question people ask.
-        </h1>
-        <div className="max-w-xl mx-auto mt-8">
-          {faqs.map((faq, index) => (
-            <FAQ key={index} question={faq.question} answer={faq.answer} />
-          ))}
+    <div className="bg-white mx-auto max-w-7xl px-5 py-10">
+      <h1 className="text-center text-4xl md:text-6xl text-[#000000]">
+        Find Your Perfect Plan
+      </h1>
+      <p className="text-center text-base max-w-2xl mx-auto mt-6 text-[#797878]">
+        Discover the ideal plan to fuel your business growth. Our pricing
+        options are carefully crafted to cater to businesses.
+      </p>
+      <div className="flex justify-center">
+        <div className="border border-[#de9005] bg-[#FBFBFB] rounded-lg mt-4 p-1 shadow-lg">
+          <button
+            onClick={() => {
+              setFirstBtn(true);
+            }}
+            className={
+              firstBtn
+                ? "bg-[#de9005] text-[#FFFFFF] py-2 px-4 md:py-3 md:px-6 rounded-lg text-base md:text-2xl"
+                : "py-2 px-4 md:py-3 md:px-6 rounded text-[#797878] text-base md:text-2xl"
+            }
+          >
+            Monthly
+          </button>
+          <button
+            onClick={() => {
+              setFirstBtn(false);
+            }}
+            className={
+              firstBtn
+                ? "py-2 px-4 md:py-3 md:px-6 rounded text-[#797878] text-base md:text-2xl"
+                : "bg-[#de9005] text-[#FFFFFF] py-2 px-4 md:py-3 md:px-6 rounded-lg text-base md:text-2xl"
+            }
+          >
+            Yearly
+          </button>
         </div>
       </div>
-
-      {/* what-to-know */}
-      <section className="mt-14 md:mt-28 mb-14 md:mb-28">
-        <div className="max-w-xl mx-auto">
-          {guidanceItems.map((item, index) => (
-            <Guidance key={index} title={item.title} content={item.content} />
-          ))}
-        </div>
-      </section>
-
-      {/* footer section */}
-      <section className="mt-14 md:mt-28 mb-14 md:mb-28">
-        <div
-          className="h-96 px-5 rounded bg-cover bg-center bg-gray-100"
-          style={style}
-        />
-        <div className="text-container mt-4 md:mt-6 lg:mt-8 text-center md:text-left">
-          <h1 className="text-2xl md:text-5xl text-[#000000] font-bold">
-            Still have questions?
+      <div className="mt-10 flex flex-col items-center md:flex-row md:justify-center gap-5">
+        {/* card 1 */}
+        <div className="border border-[#de9005] w-full md:w-[488px] shadow-lg rounded-lg flex justify-between flex-col p-4 md:p-6">
+          <div className="shadow-sm h-[56px] w-[56px] bg-[#de9005] mb-4 rounded-lg flex justify-center items-center">
+            <RocketLaunchIcon style={{ color: "#FFFFFF" }} />
+          </div>
+          <h1 className="text-[#1B223C] text-xl md:text-5xl pb-2 md:pb-4">
+            Community
           </h1>
-          <p className="text-base md:text-lg text-[#000000] font-normal mt-3 md:mt-5 lg:mt-7 mb-3 md:mb-5 lg:mb-7">
-            Get answers from an experienced Superhost near you.
+          <p className="text-[#797878] text-base md:text-2xl pb-2 md:pb-4">
+            Unleash the Power of Your Business with Pro Plan.
           </p>
-          <Link href="https://instagram.com">
-            <span className="border border-black hover:bg-black button rounded text-black hover:text-white px-4 py-2 md:px-6 md:py-3 cursor-pointer">
-              Chat us on Instagram
+          <span className="text-[#1B223C] text-2xl md:text-6xl pb-2 md:pb-4">
+            FREE{" "}
+            <span className="text-[#797878] text-base md:text-2xl">
+              per month
             </span>
-          </Link>
+          </span>
+          <hr className="pb-2 md:pb-4" />
+          <div>
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon />
+              <p className="ml-2 md:ml-4">Enhanced Analytics</p>
+            </div>
+
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon />
+              <p className="ml-2 md:ml-4">Custom Domain</p>
+            </div>
+
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon />
+              <p className="ml-2 md:ml-4">E-commerce Integration</p>
+            </div>
+
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon />
+              <p className="ml-2 md:ml-4">Priority Support</p>
+            </div>
+
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon />
+              <p className="ml-2 md:ml-4">Advanced Security</p>
+            </div>
+          </div>
+          <button className="text-[#de9005] border border-[#de9005] py-1.5 md:py-2 rounded shadow-sm">
+            Get Started
+          </button>
         </div>
-      </section>
 
-      {/* CTO Section */}
-      {/* <section className="grid gap-5 grid-cols-1 md:grid-cols-2 mt-5 md:mt-10">
-    <div className="flex flex-col justify-between">
-      <div className="mb-5">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
-          One-to-One Guidance from a Superhost
-        </h1>
-        <p className="mt-3 text-base">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae velit
-          labore minima quod nesciunt nostrum deserunt. Cum nam eaque ullam!
-        </p>
-      </div>
-      
-      <div className="mb-5">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
-          One-to-One Guidance from a Superhost
-        </h1>
-        <p className="mt-3 text-base">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae velit
-          labore minima quod nesciunt nostrum deserunt. Cum nam eaque ullam!
-        </p>
-      </div>
-      
-      <div>
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
-          One-to-One Guidance from a Superhost
-        </h1>
-        <p className="mt-3 text-base">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quae velit
-          labore minima quod nesciunt nostrum deserunt. Cum nam eaque ullam!
-        </p>
-      </div>
-    </div>
+        {/* card 2 */}
+        <div className="border border-[#0553DE] bg-[#0553DE] w-full md:w-[488px] shadow-lg rounded-lg flex justify-between flex-col p-4 md:p-6">
+          <div className="shadow-sm h-[56px] w-[56px] bg-[#de9005] mb-4 rounded-lg flex justify-center items-center">
+            <DiamondIcon style={{ color: "#FFFFFF" }} />
+          </div>
+          <h1 className="text-white text-xl md:text-5xl pb-2 md:pb-4">
+            Professional
+          </h1>
+          <p className="text-white text-base md:text-2xl pb-2 md:pb-4">
+            Unleash the Power of Your Business with Pro Plan.
+          </p>
+          <span className="text-white text-2xl md:text-6xl pb-2 md:pb-4">
+            {firstBtn ? 20 : 240}{" "}
+            <span className="text-base md:text-2xl">per month</span>
+          </span>
+          <hr className="pb-2 md:pb-4" />
+          <div>
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon style={{ color: "#FFFFFF" }} />
+              <p className="ml-2 md:ml-4 text-white">Enhanced Analytics</p>
+            </div>
 
-    <div>
-      
-    </div>
-  </section> */}
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon style={{ color: "#FFFFFF" }} />
+              <p className="ml-2 md:ml-4 text-white">Custom Domain</p>
+            </div>
+
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon style={{ color: "#FFFFFF" }} />
+              <p className="ml-2 md:ml-4 text-white">E-commerce Integration</p>
+            </div>
+
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon style={{ color: "#FFFFFF" }} />
+              <p className="ml-2 md:ml-4 text-white">Priority Support</p>
+            </div>
+            <div className="flex items-center pb-2 md:pb-4">
+              <CheckIcon style={{ color: "#FFFFFF" }} />
+              <p className="ml-2 md:ml-4 text-white">Advanced Security</p>
+            </div>
+          </div>
+          <button className="text-white bg-[#de9005] border border-[#de9005] py-1.5 md:py-2 rounded shadow-sm">
+            Get Started
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
