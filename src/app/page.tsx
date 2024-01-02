@@ -1,145 +1,100 @@
 "use client";
-import React, { useState } from "react";
-import CheckIcon from "@mui/icons-material/Check";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-import DiamondIcon from "@mui/icons-material/Diamond";
+import React from "react";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import Demo from "./components/Demo";
 
-export default function Home() {
-  const [firstBtn, setFirstBtn] = useState(true);
+interface StepperProps {
+  number: number;
+  label: string;
+  content: string;
+  hasNext: boolean;
+}
+
+const Stepper: React.FC<StepperProps> = ({
+  number,
+  label,
+  content,
+  hasNext,
+}) => (
+  <div className="flex items-center mb-4">
+    <div className="bg-[#747272] rounded-full h-8 w-8 flex items-center justify-center text-white relative z-10">
+      {hasNext ? (
+        <div className="absolute h-10 w-1 bg-[#747272] top-8"></div>
+      ) : null}
+      {number}
+    </div>
+    <div>
+      <div className="ml-4 text-lg text-[#000000]">{label}</div>
+      <div className="ml-4 text-sm text-slate-600">{content}</div>
+    </div>
+  </div>
+);
+
+const Home = () => {
+  const steps = [
+    {
+      number: 1,
+      label: "Step 1",
+      content: "Fill out application form",
+      hasNext: true,
+    },
+    { number: 2, label: "Step 2", content: "Upload resume", hasNext: true },
+    {
+      number: 3,
+      label: "Step 3",
+      content: "Complete skills assessment",
+      hasNext: true,
+    },
+    {
+      number: 4,
+      label: "Step 4",
+      content: "Schedule interview",
+      hasNext: true,
+    },
+    { number: 5, label: "Step 5", content: "Attend interview", hasNext: true },
+    { number: 6, label: "Step 6", content: "Receive job offer", hasNext: true },
+    {
+      number: 7,
+      label: "Step 7",
+      content: "Submit required documents",
+      hasNext: false,
+    },
+  ];
 
   return (
-    <div className="bg-white mx-auto max-w-7xl px-5 py-10">
-      <h1 className="text-center text-4xl md:text-6xl text-[#000000]">
-        Find Your Perfect Plan
-      </h1>
-      <p className="text-center text-base max-w-2xl mx-auto mt-6 text-[#797878]">
-        Discover the ideal plan to fuel your business growth. Our pricing
-        options are carefully crafted to cater to businesses.
-      </p>
-      <div className="flex justify-center">
-        <div className="border border-[#de9005] bg-[#FBFBFB] rounded-lg mt-4 p-1 shadow-lg">
-          <button
-            onClick={() => {
-              setFirstBtn(true);
-            }}
-            className={
-              firstBtn
-                ? "bg-[#de9005] text-[#FFFFFF] py-2 px-4 md:py-3 md:px-6 rounded-lg text-base md:text-2xl"
-                : "py-2 px-4 md:py-3 md:px-6 rounded text-[#797878] text-base md:text-2xl"
-            }
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => {
-              setFirstBtn(false);
-            }}
-            className={
-              firstBtn
-                ? "py-2 px-4 md:py-3 md:px-6 rounded text-[#797878] text-base md:text-2xl"
-                : "bg-[#de9005] text-[#FFFFFF] py-2 px-4 md:py-3 md:px-6 rounded-lg text-base md:text-2xl"
-            }
-          >
-            Yearly
-          </button>
+    <div className="mx-auto max-w-7xl flex flex-row gap-5 my-10">
+      <div className="w-1/3 h-full">
+        <div className="bg-white rounded-lg shadow-lg px-5 py-5 mb-4">
+          {steps.map((step, index) => (
+            <div key={index}>
+              <Stepper
+                number={step.number}
+                label={step.label}
+                content={step.content}
+                hasNext={step.hasNext}
+              />
+            </div>
+          ))}
         </div>
       </div>
-      <div className="mt-10 flex flex-col items-center md:flex-row md:justify-center gap-5">
-        {/* card 1 */}
-        <div className="border border-[#de9005] w-full md:w-[488px] shadow-lg rounded-lg flex justify-between flex-col p-4 md:p-6">
-          <div className="shadow-sm h-[56px] w-[56px] bg-[#de9005] mb-4 rounded-lg flex justify-center items-center">
-            <RocketLaunchIcon style={{ color: "#FFFFFF" }} />
-          </div>
-          <h1 className="text-[#1B223C] text-xl md:text-5xl pb-2 md:pb-4">
-            Community
-          </h1>
-          <p className="text-[#797878] text-base md:text-2xl pb-2 md:pb-4">
-            Unleash the Power of Your Business with Pro Plan.
-          </p>
-          <span className="text-[#1B223C] text-2xl md:text-6xl pb-2 md:pb-4">
-            FREE{" "}
-            <span className="text-[#797878] text-base md:text-2xl">
-              per month
-            </span>
-          </span>
-          <hr className="pb-2 md:pb-4" />
-          <div>
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon />
-              <p className="ml-2 md:ml-4">Enhanced Analytics</p>
-            </div>
-
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon />
-              <p className="ml-2 md:ml-4">Custom Domain</p>
-            </div>
-
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon />
-              <p className="ml-2 md:ml-4">E-commerce Integration</p>
-            </div>
-
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon />
-              <p className="ml-2 md:ml-4">Priority Support</p>
-            </div>
-
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon />
-              <p className="ml-2 md:ml-4">Advanced Security</p>
-            </div>
-          </div>
-          <button className="text-[#de9005] border border-[#de9005] py-1.5 md:py-2 rounded shadow-sm">
-            Get Started
-          </button>
+      <div className="w-2/3 h-full">
+        <div className="bg-white rounded-lg shadow-lg px-5 py-5">
+          <Demo />
         </div>
-
-        {/* card 2 */}
-        <div className="border border-[#0553DE] bg-[#0553DE] w-full md:w-[488px] shadow-lg rounded-lg flex justify-between flex-col p-4 md:p-6">
-          <div className="shadow-sm h-[56px] w-[56px] bg-[#de9005] mb-4 rounded-lg flex justify-center items-center">
-            <DiamondIcon style={{ color: "#FFFFFF" }} />
-          </div>
-          <h1 className="text-white text-xl md:text-5xl pb-2 md:pb-4">
-            Professional
-          </h1>
-          <p className="text-white text-base md:text-2xl pb-2 md:pb-4">
-            Unleash the Power of Your Business with Pro Plan.
-          </p>
-          <span className="text-white text-2xl md:text-6xl pb-2 md:pb-4">
-            {firstBtn ? 20 : 240}{" "}
-            <span className="text-base md:text-2xl">per month</span>
-          </span>
-          <hr className="pb-2 md:pb-4" />
-          <div>
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon style={{ color: "#FFFFFF" }} />
-              <p className="ml-2 md:ml-4 text-white">Enhanced Analytics</p>
-            </div>
-
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon style={{ color: "#FFFFFF" }} />
-              <p className="ml-2 md:ml-4 text-white">Custom Domain</p>
-            </div>
-
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon style={{ color: "#FFFFFF" }} />
-              <p className="ml-2 md:ml-4 text-white">E-commerce Integration</p>
-            </div>
-
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon style={{ color: "#FFFFFF" }} />
-              <p className="ml-2 md:ml-4 text-white">Priority Support</p>
-            </div>
-            <div className="flex items-center pb-2 md:pb-4">
-              <CheckIcon style={{ color: "#FFFFFF" }} />
-              <p className="ml-2 md:ml-4 text-white">Advanced Security</p>
-            </div>
-          </div>
-          <button className="text-white bg-[#de9005] border border-[#de9005] py-1.5 md:py-2 rounded shadow-sm">
-            Get Started
+        <div className="flex justify-between mt-10">
+          <button className="flex items-center justify-center px-4 py-2 text-white bg-[#747272] rounded-lg shadow-lg">
+            <ArrowBackIcon className="mr-2 h-5 w-5" />
+            Previous
+          </button>
+          <button className="flex items-center justify-center px-4 py-2 text-white bg-[#de9005] rounded-lg shadow-lg">
+            Next
+            <ArrowForwardIcon className="ml-2 h-5 w-5" />
           </button>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default Home;
