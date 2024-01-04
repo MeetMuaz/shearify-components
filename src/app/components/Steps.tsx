@@ -4,6 +4,12 @@ import Image from "next/image";
 import Add from "@mui/icons-material/Add";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 interface StepProps {
   onNext: () => void;
@@ -74,6 +80,29 @@ export function Step1() {
 }
 
 export function Step2() {
+  const [address, setAddress] = useState("");
+
+  const handleSelect = async (selectedAddress) => {
+    const results = await geocodeByAddress(selectedAddress);
+    const latLng = await getLatLng(results[0]);
+    console.log("Selected Address:", selectedAddress);
+    console.log("Latitude and Longitude:", latLng);
+    // Handle the selected address and its coordinates as needed
+  };
+
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [valid, setValid] = useState(true);
+
+  const handleChange = (value) => {
+    setPhoneNumber(value);
+    setValid(validatePhoneNumber(value));
+  };
+
+  const validatePhoneNumber = (phoneNumber) => {
+    const phoneNumberPattern = /^\+?[1-9]\d{1,14}$/;
+
+    return phoneNumberPattern.test(phoneNumber);
+  };
   return (
     <div>
       <div className="mb-4">
@@ -90,7 +119,7 @@ export function Step2() {
           type="text"
           placeholder="Enter Name or Business"
           id="businessName"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md"
         />
       </div>
       <div className="mb-4">
@@ -101,8 +130,46 @@ export function Step2() {
           type="text"
           placeholder="Enter Location"
           id="location"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md"
         />
+        {/* <PlacesAutocomplete
+          value={address}
+          onChange={(value) => setAddress(value)}
+          onSelect={handleSelect}
+        >
+          {({
+            getInputProps,
+            suggestions,
+            getSuggestionItemProps,
+            loading,
+          }) => (
+            <div>
+              <input
+                {...getInputProps({
+                  placeholder: "Type your address...",
+                  className: "location-search-input",
+                })}
+              />
+              <div className="autocomplete-dropdown-container">
+                {loading && <div>Loading...</div>}
+                {suggestions.map((suggestion) => {
+                  const style = {
+                    backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
+                  };
+                  return (
+                    <div
+                      {...getSuggestionItemProps(suggestion, {
+                        style,
+                      })}
+                    >
+                      {suggestion.description}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </PlacesAutocomplete> */}
       </div>
       <div className="mb-4">
         <label htmlFor="businessAddress" className="text-slate-600">
@@ -112,26 +179,22 @@ export function Step2() {
           type="text"
           placeholder="Enter Address"
           id="businessAddress"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md"
         />
       </div>
       <div className="mb-4">
         <label htmlFor="phoneNumber" className="text-slate-600">
           Phone
         </label>
-        <div className="flex w-full md:max-w-md gap-2">
-          <select
-            id="phoneNumberCode"
-            className="border text-slate-600 py-1 px-2 outline-gray-700 rounded"
-          >
-            <option value="volvo">+234</option>
-            <option value="saab">+91</option>
-          </select>
-          <input
-            type="text"
-            placeholder="Enter Phone"
-            id="phoneNumber"
-            className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full"
+        <div className="w-full md:max-w-md">
+          <PhoneInput
+            country={"us"}
+            inputStyle={{ width: "100%" }}
+            inputProps={{
+              name: "phone",
+              required: true,
+            }}
+            // Add more customization props as needed
           />
         </div>
       </div>
@@ -143,7 +206,7 @@ export function Step2() {
           type="text"
           placeholder="Enter Email"
           id="businessEmail"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md"
         />
       </div>
       <div className="mb-4">
@@ -153,7 +216,7 @@ export function Step2() {
         <textarea
           id="aboutService"
           placeholder="About Service"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md h-48"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md h-48"
         ></textarea>
       </div>
       <div className="mb-4">
@@ -163,10 +226,10 @@ export function Step2() {
         <div className="flex items-center mt-2">
           <input
             type="radio"
+            className="mr-1 appearance-none border border-gray-300 rounded-md w-4 h-4 checked:bg-de9005 checked:border-de9005 focus:outline-none"
             id="male"
             name="gender"
             value="male"
-            className="mr-1"
           />
           <label htmlFor="male" className="text-slate-600 mr-2">
             Male
@@ -174,10 +237,10 @@ export function Step2() {
 
           <input
             type="radio"
+            className="mr-1 appearance-none border border-gray-300 rounded-md w-4 h-4 checked:bg-de9005 checked:border-de9005 focus:outline-none"
             id="female"
             name="gender"
             value="female"
-            className="mr-1"
           />
           <label htmlFor="female" className="text-slate-600 mr-2">
             Female
@@ -185,10 +248,10 @@ export function Step2() {
 
           <input
             type="radio"
+            className="mr-1 appearance-none border border-gray-300 rounded-md w-4 h-4 checked:bg-de9005 checked:border-de9005 focus:outline-none"
             id="other"
             name="gender"
             value="other"
-            className="mr-1"
           />
           <label htmlFor="other" className="text-slate-600">
             Others
@@ -255,7 +318,7 @@ export function Step4() {
         <input
           type="text"
           placeholder="https://instagram.com"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md"
         />
       </div>
       <div className="mb-4">
@@ -265,7 +328,7 @@ export function Step4() {
         <input
           type="text"
           placeholder="https://facebook.com"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md"
         />
       </div>
       <div className="mb-4">
@@ -275,7 +338,7 @@ export function Step4() {
         <input
           type="text"
           placeholder="https://tiktok.com"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md"
         />
       </div>
       <div className="mb-4">
@@ -285,7 +348,7 @@ export function Step4() {
         <input
           type="text"
           placeholder="https://twitter.com"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md"
         />
       </div>
     </div>
@@ -430,10 +493,10 @@ export function Step7() {
         <div className="flex items-center mt-2">
           <input
             type="radio"
+            className="mr-1 appearance-none border border-gray-300 rounded-md w-4 h-4 checked:bg-de9005 checked:border-de9005 focus:outline-none"
             id="yes-availability"
             name="availability-status"
             value="yes"
-            className="mr-1"
           />
           <label htmlFor="yes-availability" className="text-slate-600 mr-2">
             Yes
@@ -441,10 +504,10 @@ export function Step7() {
 
           <input
             type="radio"
+            className="mr-1 appearance-none border border-gray-300 rounded-md w-4 h-4 checked:bg-de9005 checked:border-de9005 focus:outline-none"
             id="no-availability"
             name="availability-status"
             value="no"
-            className="mr-1"
           />
           <label htmlFor="no-availability" className="text-slate-600 mr-2">
             No
@@ -459,10 +522,10 @@ export function Step7() {
         <div className="flex items-center mt-2">
           <input
             type="radio"
+            className="mr-1 appearance-none border border-gray-300 rounded-md w-4 h-4 checked:bg-de9005 checked:border-de9005 focus:outline-none"
             id="yes-home-services"
             name="home-services"
             value="yes"
-            className="mr-1"
           />
           <label htmlFor="yes-home-services" className="text-slate-600 mr-2">
             Yes
@@ -470,10 +533,10 @@ export function Step7() {
 
           <input
             type="radio"
+            className="mr-1 appearance-none border border-gray-300 rounded-md w-4 h-4 checked:bg-de9005 checked:border-de9005 focus:outline-none"
             id="no-home-services"
             name="home-services"
             value="no"
-            className="mr-1"
           />
           <label htmlFor="no-home-services" className="text-slate-600 mr-2">
             No
@@ -491,7 +554,7 @@ export function Step7() {
         <input
           type="text"
           placeholder="$0"
-          className="block border text-slate-600 py-1 px-2 outline-gray-700 rounded w-full md:max-w-md mt-2"
+          className="block border text-slate-600 border-[#CACACA] py-1 px-2 outline-none rounded w-full md:max-w-md mt-2"
         />
       </div>
     </div>
