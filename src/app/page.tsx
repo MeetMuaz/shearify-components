@@ -255,7 +255,7 @@ const Home = () => {
 
   return (
     <div className="mx-auto max-w-7xl flex flex-row gap-5 my-10">
-      <div className="w-1/3 h-full">
+      <div className="w-1/2 h-full">
         <div className="bg-white border border-[#de9005] rounded-lg shadow-lg px-5 py-5 mb-4">
           {steps.map((step, index) => (
             <div key={index}>
@@ -269,7 +269,7 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="w-2/3 h-full">
+      <div className="w-1/2 h-full">
         <div className="bg-[#fefefe] rounded-lg shadow-lg px-5 py-5">
           <AnimatePresence>{renderStep()}</AnimatePresence>
         </div>
