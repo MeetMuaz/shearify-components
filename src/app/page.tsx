@@ -1,297 +1,304 @@
 "use client";
-import React, { useEffect } from "react";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import {
-  Step1,
-  Step2,
-  Step3,
-  Step4,
-  Step5,
-  Step6,
-  Step7,
-  Step8,
-} from "./components/Steps";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import React from "react";
 
-interface StepperProps {
-  number: number;
-  label: string;
-  content: string;
-  hasNext: boolean;
+export default function Home() {
+  return <div>Home</div>;
 }
 
-const Stepper: React.FC<StepperProps> = ({
-  number,
-  label,
-  content,
-  hasNext,
-}) => (
-  <div className="flex items-center mb-4">
-    <div className="bg-[#747272] rounded-full h-8 w-8 flex items-center justify-center text-white relative z-10">
-      {hasNext ? (
-        <div className="absolute h-10 w-[2px] bg-[#747272] top-8"></div>
-      ) : null}
-      {number}
-    </div>
-    <div>
-      <div className="ml-4 text-lg text-[#000000]">{label}</div>
-      <div className="ml-4 text-sm text-slate-600">{content}</div>
-    </div>
-  </div>
-);
+// "use client";
+// import React, { useEffect } from "react";
+// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+// import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+// import {
+//   Step1,
+//   Step2,
+//   Step3,
+//   Step4,
+//   Step5,
+//   Step6,
+//   Step7,
+//   Step8,
+// } from "./components/Steps";
+// import { useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+// import Link from "next/link";
 
-const steps = [
-  {
-    number: 1,
-    label: "Step 1",
-    content: "Choose Your Ideal Work Type",
-    hasNext: true,
-  },
-  {
-    number: 2,
-    label: "Step 2",
-    content: "Fill in Business Details",
-    hasNext: true,
-  },
-  {
-    number: 3,
-    label: "Step 3",
-    content: "Choose Your Domain",
-    hasNext: true,
-  },
-  {
-    number: 4,
-    label: "Step 4",
-    content: "Add Social Media Handles",
-    hasNext: true,
-  },
-  {
-    number: 5,
-    label: "Step 5",
-    content: "Upload Profile Pictures",
-    hasNext: true,
-  },
-  {
-    number: 6,
-    label: "Step 6",
-    content: "Upload Work Pictures",
-    hasNext: true,
-  },
-  {
-    number: 7,
-    label: "Step 7",
-    content: "Set Your Availability",
-    hasNext: true,
-  },
-  {
-    number: 8,
-    label: "Step 8",
-    content: "Add Your Services",
-    hasNext: false,
-  },
-];
+// interface StepperProps {
+//   number: number;
+//   label: string;
+//   content: string;
+//   hasNext: boolean;
+// }
 
-const Home = () => {
-  const [step, setStep] = useState<number>(1);
+// const Stepper: React.FC<StepperProps> = ({
+//   number,
+//   label,
+//   content,
+//   hasNext,
+// }) => (
+//   <div className="flex items-center mb-4">
+//     <div className="bg-[#747272] rounded-full h-8 w-8 flex items-center justify-center text-white relative z-10">
+//       {hasNext ? (
+//         <div className="absolute h-10 w-[2px] bg-[#747272] top-8"></div>
+//       ) : null}
+//       {number}
+//     </div>
+//     <div>
+//       <div className="ml-4 text-lg text-[#000000]">{label}</div>
+//       <div className="ml-4 text-sm text-slate-600">{content}</div>
+//     </div>
+//   </div>
+// );
 
-  useEffect(() => {
-    if (step === 9) {
-    }
-  }, [step]);
+// const steps = [
+//   {
+//     number: 1,
+//     label: "Step 1",
+//     content: "Choose Your Ideal Work Type",
+//     hasNext: true,
+//   },
+//   {
+//     number: 2,
+//     label: "Step 2",
+//     content: "Fill in Business Details",
+//     hasNext: true,
+//   },
+//   {
+//     number: 3,
+//     label: "Step 3",
+//     content: "Choose Your Domain",
+//     hasNext: true,
+//   },
+//   {
+//     number: 4,
+//     label: "Step 4",
+//     content: "Add Social Media Handles",
+//     hasNext: true,
+//   },
+//   {
+//     number: 5,
+//     label: "Step 5",
+//     content: "Upload Profile Pictures",
+//     hasNext: true,
+//   },
+//   {
+//     number: 6,
+//     label: "Step 6",
+//     content: "Upload Work Pictures",
+//     hasNext: true,
+//   },
+//   {
+//     number: 7,
+//     label: "Step 7",
+//     content: "Set Your Availability",
+//     hasNext: true,
+//   },
+//   {
+//     number: 8,
+//     label: "Step 8",
+//     content: "Add Your Services",
+//     hasNext: false,
+//   },
+// ];
 
-  const nextStep = () => {
-    if (step >= 8) {
-      setStep(8);
-    } else {
-      setStep(step + 1);
-    }
-  };
+// const Home = () => {
+//   const [step, setStep] = useState<number>(1);
 
-  const backStep = () => {
-    if (step <= 1) {
-      setStep(1);
-    } else {
-      setStep(step - 1);
-    }
-  };
+//   useEffect(() => {
+//     if (step === 9) {
+//     }
+//   }, [step]);
 
-  const renderStep = () => {
-    switch (step) {
-      case 1:
-        return (
-          <motion.div
-            key="step1"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: 100 },
-              visible: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: 100 },
-            }}
-          >
-            <Step1 />
-          </motion.div>
-        );
-      case 2:
-        return (
-          <motion.div
-            key="step2"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: -100 },
-              visible: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: -100 },
-            }}
-          >
-            <Step2 />
-          </motion.div>
-        );
-      case 3:
-        return (
-          <motion.div
-            key="step3"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: -100 },
-              visible: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: -100 },
-            }}
-          >
-            <Step3 />
-          </motion.div>
-        );
-      case 4:
-        return (
-          <motion.div
-            key="step4"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: -100 },
-              visible: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: -100 },
-            }}
-          >
-            <Step4 />
-          </motion.div>
-        );
-      case 5:
-        return (
-          <motion.div
-            key="step5"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: -100 },
-              visible: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: -100 },
-            }}
-          >
-            <Step5 />
-          </motion.div>
-        );
-      case 6:
-        return (
-          <motion.div
-            key="step6"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: -100 },
-              visible: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: -100 },
-            }}
-          >
-            <Step6 />
-          </motion.div>
-        );
-      case 7:
-        return (
-          <motion.div
-            key="step7"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: -100 },
-              visible: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: -100 },
-            }}
-          >
-            <Step7 />
-          </motion.div>
-        );
-      case 8:
-        return (
-          <motion.div
-            key="step7"
-            initial="hidden"
-            animate="visible"
-            exit="hidden"
-            variants={{
-              hidden: { opacity: 0, y: -100 },
-              visible: { opacity: 1, y: 0 },
-              exit: { opacity: 0, y: -100 },
-            }}
-          >
-            <Step8 />
-          </motion.div>
-        );
-      default:
-        return null;
-    }
-  };
+//   const nextStep = () => {
+//     if (step >= 8) {
+//       setStep(8);
+//     } else {
+//       setStep(step + 1);
+//     }
+//   };
 
-  return (
-    <div className="mx-auto max-w-7xl flex flex-row gap-5 my-10">
-      <div className="w-1/2 h-full">
-        <div className="bg-white border border-[#de9005] rounded-lg shadow-lg px-5 py-5 mb-4">
-          {steps.map((step, index) => (
-            <div key={index}>
-              <Stepper
-                number={step.number}
-                label={step.label}
-                content={step.content}
-                hasNext={step.hasNext}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="w-1/2 h-full">
-        <div className="bg-[#fefefe] rounded-lg shadow-lg px-5 py-5">
-          <AnimatePresence>{renderStep()}</AnimatePresence>
-        </div>
-        <div className="flex justify-between mt-10">
-          <button
-            onClick={backStep}
-            className="flex items-center justify-center px-4 py-2 text-white bg-[#747272] rounded-lg shadow-lg"
-          >
-            <ArrowBackIcon className="mr-2 h-5 w-5" />
-            Previous
-          </button>
-          <button
-            onClick={nextStep}
-            className="flex items-center justify-center px-4 py-2 text-white bg-[#de9005] rounded-lg shadow-lg"
-          >
-            Next
-            <ArrowForwardIcon className="ml-2 h-5 w-5" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+//   const backStep = () => {
+//     if (step <= 1) {
+//       setStep(1);
+//     } else {
+//       setStep(step - 1);
+//     }
+//   };
 
-export default Home;
+//   const renderStep = () => {
+//     switch (step) {
+//       case 1:
+//         return (
+//           <motion.div
+//             key="step1"
+//             initial="hidden"
+//             animate="visible"
+//             exit="hidden"
+//             variants={{
+//               hidden: { opacity: 0, y: 100 },
+//               visible: { opacity: 1, y: 0 },
+//               exit: { opacity: 0, y: 100 },
+//             }}
+//           >
+//             <Step1 />
+//           </motion.div>
+//         );
+//       case 2:
+//         return (
+//           <motion.div
+//             key="step2"
+//             initial="hidden"
+//             animate="visible"
+//             exit="hidden"
+//             variants={{
+//               hidden: { opacity: 0, y: -100 },
+//               visible: { opacity: 1, y: 0 },
+//               exit: { opacity: 0, y: -100 },
+//             }}
+//           >
+//             <Step2 />
+//           </motion.div>
+//         );
+//       case 3:
+//         return (
+//           <motion.div
+//             key="step3"
+//             initial="hidden"
+//             animate="visible"
+//             exit="hidden"
+//             variants={{
+//               hidden: { opacity: 0, y: -100 },
+//               visible: { opacity: 1, y: 0 },
+//               exit: { opacity: 0, y: -100 },
+//             }}
+//           >
+//             <Step3 />
+//           </motion.div>
+//         );
+//       case 4:
+//         return (
+//           <motion.div
+//             key="step4"
+//             initial="hidden"
+//             animate="visible"
+//             exit="hidden"
+//             variants={{
+//               hidden: { opacity: 0, y: -100 },
+//               visible: { opacity: 1, y: 0 },
+//               exit: { opacity: 0, y: -100 },
+//             }}
+//           >
+//             <Step4 />
+//           </motion.div>
+//         );
+//       case 5:
+//         return (
+//           <motion.div
+//             key="step5"
+//             initial="hidden"
+//             animate="visible"
+//             exit="hidden"
+//             variants={{
+//               hidden: { opacity: 0, y: -100 },
+//               visible: { opacity: 1, y: 0 },
+//               exit: { opacity: 0, y: -100 },
+//             }}
+//           >
+//             <Step5 />
+//           </motion.div>
+//         );
+//       case 6:
+//         return (
+//           <motion.div
+//             key="step6"
+//             initial="hidden"
+//             animate="visible"
+//             exit="hidden"
+//             variants={{
+//               hidden: { opacity: 0, y: -100 },
+//               visible: { opacity: 1, y: 0 },
+//               exit: { opacity: 0, y: -100 },
+//             }}
+//           >
+//             <Step6 />
+//           </motion.div>
+//         );
+//       case 7:
+//         return (
+//           <motion.div
+//             key="step7"
+//             initial="hidden"
+//             animate="visible"
+//             exit="hidden"
+//             variants={{
+//               hidden: { opacity: 0, y: -100 },
+//               visible: { opacity: 1, y: 0 },
+//               exit: { opacity: 0, y: -100 },
+//             }}
+//           >
+//             <Step7 />
+//           </motion.div>
+//         );
+//       case 8:
+//         return (
+//           <motion.div
+//             key="step7"
+//             initial="hidden"
+//             animate="visible"
+//             exit="hidden"
+//             variants={{
+//               hidden: { opacity: 0, y: -100 },
+//               visible: { opacity: 1, y: 0 },
+//               exit: { opacity: 0, y: -100 },
+//             }}
+//           >
+//             <Step8 />
+//           </motion.div>
+//         );
+//       default:
+//         return null;
+//     }
+//   };
+
+//   return (
+//     <div className="mx-auto max-w-7xl flex flex-row gap-5 my-10">
+//       <div className="w-1/2 h-full">
+//         <div className="bg-white border border-[#de9005] rounded-lg shadow-lg px-5 py-5 mb-4">
+//           {steps.map((step, index) => (
+//             <div key={index}>
+//               <Stepper
+//                 number={step.number}
+//                 label={step.label}
+//                 content={step.content}
+//                 hasNext={step.hasNext}
+//               />
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//       <div className="w-1/2 h-full">
+//         <div className="bg-[#fefefe] rounded-lg shadow-lg px-5 py-5">
+//           <AnimatePresence>{renderStep()}</AnimatePresence>
+//         </div>
+//         <div className="flex justify-between mt-10">
+//           <button
+//             onClick={backStep}
+//             className="flex items-center justify-center px-4 py-2 text-white bg-[#747272] rounded-lg shadow-lg"
+//           >
+//             <ArrowBackIcon className="mr-2 h-5 w-5" />
+//             Previous
+//           </button>
+//           <button
+//             onClick={nextStep}
+//             className="flex items-center justify-center px-4 py-2 text-white bg-[#de9005] rounded-lg shadow-lg"
+//           >
+//             Next
+//             <ArrowForwardIcon className="ml-2 h-5 w-5" />
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Home;
